@@ -55,6 +55,11 @@ class LogInActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
+                    val sharePref = getSharedPreferences("LoginInfo", MODE_PRIVATE)
+                    val editor = sharePref.edit()
+                    editor.putBoolean("Login", true)
+                    editor.commit()
+
                     Toast.makeText(this, "Log in success", Toast.LENGTH_SHORT).show()
                     Intent(this, MainActivity::class.java).also {
                         startActivity(it)

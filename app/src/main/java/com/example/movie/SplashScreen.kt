@@ -19,7 +19,15 @@ class SplashScreen : AppCompatActivity() {
         splashImage.animate().setDuration(1500L).alpha(1f).withEndAction {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
-            startActivity(Intent(this, LogInActivity::class.java))
+
+            val sharePref = getSharedPreferences("LoginInfo", MODE_PRIVATE)
+            if(sharePref.getBoolean("Login", false)){
+                Intent(this, MainActivity::class.java).also {
+                    startActivity(it)
+                }
+            } else {
+                startActivity(Intent(this, LogInActivity::class.java))
+            }
         }
     }
 }

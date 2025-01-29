@@ -1,14 +1,10 @@
 package com.example.movie
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityLogInBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -37,6 +33,17 @@ class LogInActivity : AppCompatActivity() {
             }
         }
 
+        binding.txvForgetPassword.setOnClickListener {
+            val email = binding.edtSingInEmail.text.toString()
+
+            if (TextUtils.isEmpty(email)) {
+                binding.edtSingInEmail.error = "Email is require"
+                binding.edtSingInEmail.requestFocus()
+            } else {
+                forgetPassword(email)
+            }
+        }
+
         binding.btnSingUp.setOnClickListener {
             Intent(this, SingUpActivity::class.java).also {
                 startActivity(it)
@@ -56,6 +63,19 @@ class LogInActivity : AppCompatActivity() {
                     Toast.makeText(this, "Log in fail", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun forgetPassword(email: String) {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Intent(this, ForgetPasswordActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+            else {
+                Toast.makeText(this, "Reset fail", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroy() {

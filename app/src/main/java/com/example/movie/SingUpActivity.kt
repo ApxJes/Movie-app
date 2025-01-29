@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.movie.databinding.ActivityLogInBinding
 import com.example.movie.databinding.ActivitySingUpBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class SingUpActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class SingUpActivity : AppCompatActivity() {
                 binding.edtSingUpPassword.error = "Password is require!"
                 binding.edtSingUpPassword.requestFocus()
             } else {
-                Toast.makeText(this, "successfully create an account", Toast.LENGTH_SHORT).show()
+                registerForAccount(email, password)
             }
         }
 
@@ -37,6 +37,27 @@ class SingUpActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+    }
+
+    private fun registerForAccount(email: String, password: String) {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    Toast.makeText(
+                        this,
+                        "Account has been created, Please log in again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                    onBackPressed()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Fail!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
     override fun onDestroy() {

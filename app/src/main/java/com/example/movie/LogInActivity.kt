@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityLogInBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LogInActivity : AppCompatActivity() {
 
@@ -32,11 +33,7 @@ class LogInActivity : AppCompatActivity() {
                 binding.edtSingInPassword.error = "Password is require"
                 binding.edtSingInPassword.requestFocus()
             } else {
-                Toast.makeText(
-                    this,
-                    "Log in successful",
-                    Toast.LENGTH_SHORT
-                ).show()
+                loginAccount(email, password)
             }
         }
 
@@ -45,6 +42,20 @@ class LogInActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+    }
+
+    private fun loginAccount(email: String, password: String) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    Toast.makeText(this, "Log in success", Toast.LENGTH_SHORT).show()
+                    Intent(this, MainActivity::class.java).also {
+                        startActivity(it)
+                    }
+                } else {
+                    Toast.makeText(this, "Log in fail", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     override fun onDestroy() {

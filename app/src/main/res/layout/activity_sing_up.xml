@@ -35,7 +35,6 @@
                 android:src="@drawable/movie_icon" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -43,13 +42,10 @@
                 android:paddingEnd="20dp"
                 app:helperText="Require*"
                 app:helperTextTextColor="@color/design_default_color_error"
-                app:hintTextColor="@color/navyBlue1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imvMovie">
+                app:hintTextColor="@color/navyBlue1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEmail"
+                    android:id="@+id/edtSingUpEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Email"
@@ -59,7 +55,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -68,13 +63,10 @@
                 app:helperText="Require*"
                 app:helperTextTextColor="@color/design_default_color_error"
                 app:hintTextColor="@color/navyBlue1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputLayout1"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPassword"
+                    android:id="@+id/edtSingUpPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Password"
@@ -92,10 +84,7 @@
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/purple"
                 android:text="Sing up"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputLayout2" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/txvHaveAccount"

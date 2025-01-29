@@ -19,15 +19,14 @@ class SingUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSingUp.setOnClickListener {
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
+            val email = binding.edtSingUpEmail.text.toString()
+            val password = binding.edtSingUpPassword.text.toString()
 
             if (TextUtils.isEmpty(email)) {
-                binding.edtEmail.error = "Email is require!"
-                binding.edtEmail.requestFocus()
+                binding.edtSingUpEmail.error = "Email is Require"
             } else if (TextUtils.isEmpty(password)) {
-                binding.edtPassword.error = "Password is require!"
-                binding.edtPassword.requestFocus()
+                binding.edtSingUpPassword.error = "Password is require!"
+                binding.edtSingUpPassword.requestFocus()
             } else {
                 Toast.makeText(this, "successfully create an account", Toast.LENGTH_SHORT).show()
             }
